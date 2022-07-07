@@ -91,7 +91,8 @@ class BottomSheet extends Component {
       onClose = () => this.close(),
       radius,
       containerStyle,
-      rootStyle
+      rootStyle,
+      modalProps={}
     } = this.props;
     const { animatedHeight, pan, modalVisible } = this.state;
     const panStyle = {
@@ -99,7 +100,7 @@ class BottomSheet extends Component {
     };
 
     return (
-      <Modal transparent visible={modalVisible} onRequestClose={onRequestClose}>
+      <Modal transparent visible={modalVisible} onRequestClose={onRequestClose} {...modalProps}>
         <View
           style={[
             styles.wrapper,
