@@ -14,6 +14,7 @@ export interface BottomSheetProps {
   radius?: number;
   duration?:number;
   modalProps?:any;
+  children?:Element[] | Element;
 
 }
 export interface BottomSheetState {
