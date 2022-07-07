@@ -21,20 +21,20 @@ class BottomSheet extends Component {
   }
 
   setModalVisible(visible) {
-    const { closeFunction, height } = this.props;
+    const { closeFunction, height, duration,useNativeDrived } = this.props;
     const { animatedHeight, pan } = this.state;
     if (visible) {
       this.setState({ modalVisible: visible });
       Animated.timing(animatedHeight, {
         toValue: height,
-        duration: 300,
-        useNativeDriver: false,
+        duration: duration ?? 300,
+        useNativeDriver: useNativeDrived || false,
       }).start();
     } else {
       Animated.timing(animatedHeight, {
         toValue: 0,
-        duration: 400,
-        useNativeDriver: false,
+        duration: duration ?? 400,
+        useNativeDriver: useNativeDrived || false,
       }).start(() => {
         pan.setValue({ x: 0, y: 0 });
         this.setState({
@@ -90,6 +90,8 @@ class BottomSheet extends Component {
       onRequestClose,
       onClose = () => this.close(),
       radius,
+      containerStyle,
+      rootStyle
     } = this.props;
     const { animatedHeight, pan, modalVisible } = this.state;
     const panStyle = {
@@ -102,6 +104,7 @@ class BottomSheet extends Component {
           style={[
             styles.wrapper,
             { backgroundColor: backgroundColor || "#25252599" },
+            rootStyle     
           ]}
         >
           <TouchableOpacity
@@ -120,6 +123,7 @@ class BottomSheet extends Component {
                 borderTopLeftRadius: radius || 10,
                 backgroundColor: sheetBackgroundColor || "#F3F3F3",
               },
+               containerStyle
             ]}
           >
             {hasDraggableIcon && (
