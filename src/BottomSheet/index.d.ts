@@ -12,6 +12,9 @@ export interface BottomSheetProps {
   onRequestClose?: () => void;
   onClose?: () => void;
   radius?: number;
+  duration?:number;
+  modalProps?:any;
+
 }
 export interface BottomSheetState {
   modalVisible: boolean;
